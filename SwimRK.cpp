@@ -12,6 +12,7 @@ int main()
 	for (int i = 0; i < 10000; i++) {
 		t.push_back(i * 0.001);
 	}
+	//cout << "t" << t.at(1) - t.at(0) << endl;
 	vector<double> x = { 1 };
 	vector<double> y = { 1 };
 	cout << x.at(0) << endl;
@@ -22,7 +23,7 @@ int main()
 	for (size_t i = 0; i < t.size() - 1; i++) {
 		double* xynext = rk_step(
 			x.at(i), y.at(i), t.at(i), 
-			t.at(i + 1) - t.at(i), args, y, slice(t, 0, i + 1)
+			t.at(1) - t.at(0), args, y, slice(t, 0, i + 1)
 		);
 		x.push_back(xynext[0]);
 		y.push_back(xynext[1]);

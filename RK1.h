@@ -3,9 +3,9 @@
 #include<vector>
 #include <stdexcept>
 using namespace std;
-double* f(double x, double y, double t,double* args);
-double cal_force(double f_hand_x, double f_hand_y, double w_hand_x, double w_hand_y,
-	double T, double t);
+double* f(double x, double y, double t, double h, double y_integral, double* args);
+double cal_force(double f_hand, double f_leg, double w_hand, double w_leg,
+	double T, double t, double h);
 double integral_trap(vector<double> x, vector<double> t);
 double* rk_step(double x, double y, double t,  double h, double args[], vector<double> y_values, vector<double> t_values);
 template<typename T>

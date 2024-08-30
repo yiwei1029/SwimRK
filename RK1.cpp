@@ -19,7 +19,7 @@ double cal_force(double f_hand, double f_leg, double w_hand, double w_leg,
 		return 0.0;
 	}
 	else if (remain_deltas < (int)(3 * period_deltas / 4)) {
-		return f_leg * sin(w_leg * sin(remain_deltas -
+		return f_leg * sin(w_leg * (remain_deltas -
 			(int)(period_deltas / 2)) * h);
 	}
 	else {
@@ -55,6 +55,7 @@ double* f(double x, double y, double t, double h, double y_integral,double* args
 	double T = args[13];
 	double f_x = cal_force(f_hand_x, f_leg_x, w_hand, w_leg, T, t, h);
 	double f_y = cal_force(f_hand_y, f_leg_y,w_hand,w_leg, T, t,h);
+	//cout << f_y << endl;
 	double dxdt = 1 / m * (f_x - k * x * sqrt(pow(x, 2) + pow(y, 2)));
 	double dydt = 1/m*(
 		f_y
@@ -69,7 +70,7 @@ double* f(double x, double y, double t, double h, double y_integral,double* args
 
 double* rk_step(double x, double y, double t, double h, double args[], vector<double> y_values, vector<double> t_values) {
 	double y_integral = integral_trap(y_values, t_values);
-	cout << y_integral << endl;
+	//cout << y_integral << endl;
 	auto k1 = f(x, y,t, h, y_integral,args);
 	auto k2 = f(x + h / 2 * k1[0], y + h / 2 * k1[1],t+h/2,h, y_integral, args);
 	auto k3 = f(x + h / 2 * k2[0], y + h / 2 * k2[1],t+h/2,h, y_integral, args);
